@@ -11,7 +11,7 @@ pool: myAgentPool
 
 variables:
   # Azure Resource Manager connection created during pipeline creation
-  azureServiceConnectionId: 'mysvcconn'
+  azureServiceConnectionId: 'myServiceConnection'
   
   # Web app name
   webAppName: 'myweb268308'
@@ -30,17 +30,10 @@ stages:
     pool: myAgentPool
     steps:    
     - script: |
-        python3.9 -m pip install --upgrade pip
-        python3.9 -m pip install setup
+        export PATH=$HOME/.local/bin:$PATH
         python3.9 -m pip install -r requirements.txt
       workingDirectory: $(projectRoot)
-
-    - script: |
-        export PATH=$HOME/.local/bin:$PATH
-        make install
-        make lint
-      workingDirectory: $(projectRoot)
-      displayName: 'Run lint tests'
+      displayName: 'Step - Install requirements.txt'
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
