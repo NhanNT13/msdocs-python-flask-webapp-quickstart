@@ -6,7 +6,7 @@
 trigger:
 - main
 - build
-- build_and_deploy-v2
+- build_and_deploy-v3
 
 pool: myAgentPool
 
@@ -31,9 +31,9 @@ stages:
     pool: myAgentPool
     steps:    
     - script: |
-        python3.7 -m pip install --upgrade pip
-        python3.7 -m pip install setuptools
-        python3.7 -m pip install --no-cache-dir -r requirements.txt
+        python3.12 -m pip install --upgrade pip
+        python3.12 -m pip install setuptools
+        python3.12 -m pip install --no-cache-dir -r requirements.txt
       workingDirectory: $(projectRoot)
 
     - script: |
